@@ -4,6 +4,7 @@ import glob
 from skimage.morphology import convex_hull_image
 import csv
 import os
+import pandas as pd
 
 def convex(folder):
     # 指定したディレクトリの画像を抽出
@@ -25,7 +26,11 @@ def convex(folder):
             i = os.path.basename(i)
             writer.writerow([i, s])
 
-    return filename
+    df = pd.read_csv(filename)
+    min_area = df['convex_hull_area'].min()
+    min_posi = df['convex_hull_area'].idxmin()
+
+    return filename, min_posi,min_area
 
 if __name__ == "__main__":
     print(convex("source"))
