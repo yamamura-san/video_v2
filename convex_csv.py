@@ -5,11 +5,16 @@ from skimage.morphology import convex_hull_image
 import csv
 import os
 import pandas as pd
+from natsort import natsorted
 
 def convex(folder):
     # 指定したディレクトリの画像を抽出
     imgs = folder+"/*jpg"
     imgs_list = glob.glob(imgs)
+    print(imgs_list)
+    imgs_list = natsorted(imgs_list)
+    print(imgs_list)
+
 
     # データを出力するcsv作成
     filename = "result.csv"
@@ -34,3 +39,4 @@ def convex(folder):
 
 if __name__ == "__main__":
     print(convex("source"))
+
